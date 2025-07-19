@@ -34,6 +34,23 @@ async function main() {
                             topImage: dummyImages[1],
                             published: true,
                             }, 
+
+                            { title: '3番目のブログ投稿 良い',
+                            content: 'これは3番目のブログ投稿です。Next.jsとPrismaでブログを作成しています。',
+                            topImage: dummyImages[0],
+                            published: true,
+                            },
+                            { title: '4番目の投稿 良い',
+                            content: 'ブログの機能を少しずつ追加していきます。認証機能やダッシュボードなども実装予定です。',
+                            topImage: dummyImages[1],
+                            published: true,
+                            }, 
+                            { title: '5番目の投稿 普通',
+                            content: 'ブログの機能を少しずつ追加していきます。認証機能やダッシュボードなども実装予定です。',
+                            topImage: dummyImages[1],
+                            published: true,
+                            }, 
+
                 ]
             } 
         } 
