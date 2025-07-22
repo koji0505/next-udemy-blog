@@ -11,7 +11,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { createUser } from '@/lib/actions/createuser' // ServerAction
+import { createUser } from '@/lib/actions/createUser' // ServerAction
 // import { type } from '../../../../next-udemy-basic/src/generated/prisma/index';
 
 export default function RegisterForm() {
