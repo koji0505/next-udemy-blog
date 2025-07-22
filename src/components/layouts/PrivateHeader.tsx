@@ -1,0 +1,38 @@
+import Link from "next/link"
+// import {Button} from "@/components/ui/button"
+// import SearchBox from "../post/SearchBox"
+// import { Input } from "@/components/ui/input" 
+import {
+    NavigationMenu,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+  } from "@/components/ui/navigation-menu"
+import Setting from "./Setting"
+import { auth } from "@/auth"
+
+export default async function PrivateHeader() {
+    
+    const session = await auth()
+   
+    if(!session?.user?.email) throw new Error("不正なリクエストです。")
+
+    return (
+        <header className="boarder-b bg-blue-200 ">
+            <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+                <NavigationMenu>
+                    <NavigationMenuList>
+                        <NavigationMenuItem>
+                            <Link href="/dashboard" legacyBehavior passHref>
+                                <NavigationMenuLink className="text-xl font-bold">
+                                    管理ページ
+                                </NavigationMenuLink>
+                            </Link>  
+                        </NavigationMenuItem>
+                    </NavigationMenuList>
+                </NavigationMenu>
+                <Setting session={session} />
+            </div>
+        </header>
+    )
+}
