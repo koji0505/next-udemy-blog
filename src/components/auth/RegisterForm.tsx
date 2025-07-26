@@ -29,7 +29,7 @@ export default function RegisterForm() {
                 <div className="space-y-2">
                     <Label htmlFor="name">名前</Label>
                     <Input type="text" name="name" id="name" required />
-                    {state.errors.email && (
+                    {state.errors.name && (
                         <p className="text-red-500 text-sm">{state.errors.name.join(',')}</p>) }
                 </div>
                 <div className="space-y-2">

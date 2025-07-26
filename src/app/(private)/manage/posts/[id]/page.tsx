@@ -1,8 +1,9 @@
 import {notFound} from 'next/navigation'
-import { getPost } from '@/lib/post'
+import { getOwnPost } from '@/lib/ownPost'
 import Image from 'next/image'
 import { format } from 'date-fns'
 import {ja} from 'date-fns/locale'
+import { auth } from "@/auth"
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
@@ -28,15 +29,21 @@ type Params={
 //     params: Promise<T>
 // }
 
-export default async function PostPage({params}:Params) {
+export default async function ShowPage({params}:Params) {
+    
+    const session = await auth()
+    const userId = session?.user?.id;
+    
+    if (!session?.user?.email || !userId) throw new Error("不正なリクエストです")
+
     const {id}=await params
-    const post=await getPost(id)
+    const post=await getOwnPost(userId,id)
 
     if(!post){
         notFound()
     }
 
-    return (
+        return (
         <div className="container mx-auto px-4 py-8">
             <Card className="max-w-3xl mx-auto">
                  { post.topImage && (
@@ -66,18 +73,16 @@ export default async function PostPage({params}:Params) {
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
-                     <CardContent>
-                        <div className="prose max-w-none">
-                            <ReactMarkdown
-                                remarkPlugins={[remarkGfm]}
-                                rehypePlugins={[rehypeHighlight]}
-                                skipHtml={false} // HTMLスキップを無効化
-                                unwrapDisallowed={true} // Markdownの改行を解釈
-                            >
-                                {post.content}
-                            </ReactMarkdown>
-                        </div>
-                    </CardContent>
+                    <div className="prose max-w-none">
+                        <ReactMarkdown
+                            remarkPlugins={[remarkGfm]}
+                            rehypePlugins={[rehypeHighlight]}
+                            skipHtml={false} // HTMLスキップを無効化
+                            unwrapDisallowed={true} // Markdownの改行を解釈
+                        >
+                            {post.content}
+                        </ReactMarkdown>
+                    </div>
                 </CardContent>
             </Card>
 
