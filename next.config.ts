@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'picsum.photos',
       },
+      {
+        protocol: 'https',
+        hostname: 'ichzbuoylchzlqqzbvmt.supabase.co',
+        // pathname: '/storage/v1/object/public/udemy-next-blog-bucket/**',
+      },
     ],
   },
   experimental: {
